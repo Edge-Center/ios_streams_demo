@@ -175,7 +175,7 @@ extension RTMPStreamManager: RTMPStreamDelegate {
         if bitrate < currentSettings.bitrate - ((currentSettings.bitrate - lowerSettings.bitrate) / 2) {
             setupVideoSetting(type: lowerType)
             currentVideoType = lowerType
-            print("Reducing the resolutin to \(lowerSettings.width) x \(lowerSettings.height)")
+            print("Reducing the resolution to \(lowerSettings.width) x \(lowerSettings.height)")
         }
     }
     
@@ -190,7 +190,7 @@ extension RTMPStreamManager: RTMPStreamDelegate {
         if bitrate > currentSettings.bitrate - ((currentSettings.bitrate - upperSettings.bitrate) / 2) {
             setupVideoSetting(type: upperType)
             currentVideoType = upperType
-            print("Increasing the resolutin to \(upperSettings.width) x \(upperSettings.height)")
+            print("Increasing the resolution to \(upperSettings.width) x \(upperSettings.height)")
         }
     }
 }

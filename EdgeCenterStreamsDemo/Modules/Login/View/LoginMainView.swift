@@ -12,7 +12,7 @@ final class LoginMainView: UIView {
     
     private let labelTitle: UILabel = {
         let label = UILabel()
-        label.text = "Welcome"
+        label.text = "Добро пожаловать"
         label.font = .systemFont(ofSize: 28, weight: .bold)
         label.textColor = .grey800
         label.textAlignment = .center
@@ -22,7 +22,7 @@ final class LoginMainView: UIView {
     
     private let labelSubtitle: UILabel = {
         let label = UILabel()
-        label.text = "Happy to see you again!"
+        label.text = "Рады видеть вас снова!"
         label.font = .systemFont(ofSize: 17, weight: .regular)
         label.textColor = .grey600
         label.textAlignment = .center
@@ -50,7 +50,7 @@ final class LoginMainView: UIView {
         button.addTarget(self, action: #selector(tapSignButton), for: .touchUpInside)
         button.backgroundColor = .grey800
         button.layer.cornerRadius = 4
-        button.setTitle("Sign in", for: .normal)
+        button.setTitle("Войти", for: .normal)
         button.setTitleColor(.white, for: .normal)
         
         return button

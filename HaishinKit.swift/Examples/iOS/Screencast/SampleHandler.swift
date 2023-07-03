@@ -72,8 +72,8 @@ open class SampleHandler: RPBroadcastSampleHandler {
 
     @objc
     private func rtmpStatusEvent(_ status: Notification) {
-        let e = Event.from(status)
-        logger.info(e)
+        let event = Event.from(status)
+        logger.info(event)
         guard
             let data: ASObject = e.data as? ASObject,
             let code: String = data["code"] as? String else {

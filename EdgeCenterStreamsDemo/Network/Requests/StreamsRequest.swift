@@ -18,8 +18,8 @@ struct StreamsRequest: DataRequest {
     }
 }
 
-struct StreamDetailesRequest: DataRequest {
-    typealias Response = StreamDetailes
+struct StreamDetailsRequest: DataRequest {
+    typealias Response = StreamDetails
     
     let token: String
     let id: Int

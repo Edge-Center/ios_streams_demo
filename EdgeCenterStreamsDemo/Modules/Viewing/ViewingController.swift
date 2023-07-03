@@ -7,8 +7,8 @@ final class ViewingController: BaseViewController {
 
     private let viewingView = ViewingView()
     
-    private var activitiIndicatorFooter: ViewingCollectionFooter?
-    private var data: [StreamDetailes] = []
+    private var activityIndicatorFooter: ViewingCollectionFooter?
+    private var data: [StreamDetails] = []
     private var currentPage = 1
     
     override func loadView() {
@@ -36,9 +36,9 @@ final class ViewingController: BaseViewController {
         }
 
         let http = HTTPCommunicator()
-        let requst = StreamsRequest(token: token, page: page)
+        let request = StreamsRequest(token: token, page: page)
 
-        http.request(requst) { [weak self] result in
+        http.request(request) { [weak self] result in
             guard let self = self else { return }
             
             DispatchQueue.main.async {   
@@ -54,7 +54,7 @@ final class ViewingController: BaseViewController {
                 case .success(let streams): 
                     streams.forEach { stream in
                         guard !self.data.contains(where: { $0.id == stream.id }) else { return }
-                        self.loadStreamDetailes(id: stream.id, token: token)
+                        self.loadStreamDetails(id: stream.id, token: token)
                     }
 
                     guard !self.data.isEmpty else {
@@ -66,9 +66,9 @@ final class ViewingController: BaseViewController {
         }
     }
     
-    private func loadStreamDetailes(id: Int, token: String) {
+    private func loadStreamDetails(id: Int, token: String) {
         let http = HTTPCommunicator()
-        let request = StreamDetailesRequest(token: token, id: id)
+        let request = StreamDetailsRequest(token: token, id: id)
         
         http.request(request) { [weak self] result in
             guard let self = self else { return }
@@ -83,9 +83,9 @@ final class ViewingController: BaseViewController {
                         self.errorHandle(error)
                     }
 
-                case .success(let detailes): 
-                    if !self.data.contains(where: { $0.id == detailes.id }) {
-                        self.data += [detailes]
+                case .success(let details):
+                    if !self.data.contains(where: { $0.id == details.id }) {
+                        self.data += [details]
                     }
                     
                     if self.data.count == self.currentPage * 25 {
@@ -100,9 +100,9 @@ final class ViewingController: BaseViewController {
                     self.viewingView.collectionView.reloadData()
                     self.viewingView.state = .content
                     
-                    self.activitiIndicatorFooter?.activityIndicator.stopAnimating()
-                    self.activitiIndicatorFooter?.activityIndicator.transform = .init(scaleX: 0, y: 0)
-                    self.activitiIndicatorFooter?.isLoading = false
+                    self.activityIndicatorFooter?.activityIndicator.stopAnimating()
+                    self.activityIndicatorFooter?.activityIndicator.transform = .init(scaleX: 0, y: 0)
+                    self.activityIndicatorFooter?.isLoading = false
                 }
             }
         }
@@ -133,9 +133,9 @@ final class ViewingController: BaseViewController {
                 self.present(self.createAlert(), animated: true)
             }
             
-            self.activitiIndicatorFooter?.activityIndicator.stopAnimating()
-            self.activitiIndicatorFooter?.activityIndicator.transform = .init(scaleX: 0, y: 0)
-            self.activitiIndicatorFooter?.isLoading = false
+            self.activityIndicatorFooter?.activityIndicator.stopAnimating()
+            self.activityIndicatorFooter?.activityIndicator.transform = .init(scaleX: 0, y: 0)
+            self.activityIndicatorFooter?.isLoading = false
         }
     }
     
@@ -182,7 +182,7 @@ extension ViewingController: UICollectionViewDataSource, UICollectionViewDelegat
             footer.activityIndicator.transform = .init(scaleX: 0, y: 0)
         }
        
-        activitiIndicatorFooter = footer
+        activityIndicatorFooter = footer
         return footer
     }
     
@@ -225,7 +225,7 @@ extension ViewingController: UICollectionViewDelegateFlowLayout {
 
 extension ViewingController {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        guard let activityFooter = activitiIndicatorFooter, !activityFooter.isLoading else { return }
+        guard let activityFooter = activityIndicatorFooter, !activityFooter.isLoading else { return }
 
         let contentYOffset = Float(scrollView.contentOffset.y)
         let contentHeight = Float(scrollView.contentSize.height)
@@ -246,7 +246,7 @@ extension ViewingController {
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        if activitiIndicatorFooter?.isLoading == true {
+        if activityIndicatorFooter?.isLoading == true {
             loadVODs(page: currentPage)
         } 
     }

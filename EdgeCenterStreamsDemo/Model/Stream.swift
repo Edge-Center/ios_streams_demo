@@ -46,7 +46,7 @@ struct Stream: Decodable {
     }
 }
 
-struct StreamDetailes: Decodable {
+struct StreamDetails: Decodable {
     let id: Int
     let hlsString: String
     let name: String

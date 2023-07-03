@@ -20,7 +20,7 @@ Set up live streaming in 15 minutes in your IOS project instead of 7 days of wor
     * Configurable bitrate, sample rate, stereo/mono
     * Processing: noise suppressor, echo cancellation
 # Testing the app with your EdgeCenter account
-1. You can clone this project and run it in Android Studio, where you can test it either by connecting a real device or through an Android emulator
+1. You can clone this project and run it in Xcode, where you can test it either by connecting a real device or through an IOS emulator
 2. Sign in with your EdgeCenter account email and password.
 3. On the Streams screen, you can watch the available streams
 4. On the Select stream screen, you can select/create a stream to start streaming
